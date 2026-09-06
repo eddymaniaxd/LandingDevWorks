@@ -1,0 +1,41 @@
+{
+  "name": "devworks-landing",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "build:fast": "astro build",
+    "preview": "astro preview",
+    "serve": "node -r dotenv/config ./dist/server/entry.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/node": "8.3.4",
+    "@astrojs/react": "^4.2.0",
+    "@astrojs/sitemap": "3.2.1",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/manrope": "^5.1.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "astro": "4.16.7",
+    "dotenv": "^17.4.2",
+    "geoip-lite": "^1.4.10",
+    "gsap": "^3.12.5",
+    "lucide-react": "^0.454.0",
+    "lucide-static": "^0.454.0",
+    "nodemailer": "^6.10.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/geoip-lite": "^1.4.4",
+    "@types/nodemailer": "^6.4.24",
+    "tailwindcss": "^4.0.0"
+  }
+}

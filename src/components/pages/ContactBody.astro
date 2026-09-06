@@ -1,0 +1,67 @@
+---
+import ContactForm from "@components/contact/ContactForm";
+import Icon from "@components/shared/Icon.astro";
+import { site } from "@/lib/site";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="relative overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
+  <div class="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-40" aria-hidden="true"></div>
+
+  <div class="container-page grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+    <div>
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.contactPage.eyebrow}</p>
+      <h1 data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground text-balance">
+        {t.contactPage.heading}
+      </h1>
+      <p data-reveal data-reveal-delay="120" class="mt-6 max-w-md text-body-lg leading-relaxed text-foreground-muted">
+        {t.contactPage.description}
+      </p>
+
+      <div data-reveal data-reveal-delay="180" class="mt-10 space-y-4">
+        {site.whatsapp.isConfigured && (
+          <a
+            href={site.whatsapp.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics="whatsapp_click"
+            class="flex items-center gap-3 text-sm text-foreground-muted transition-colors hover:text-foreground"
+          >
+            <span class="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface text-accent">
+              <Icon name="message-circle" size={18} />
+            </span>
+            {t.contactPage.whatsappLink}
+          </a>
+        )}
+        <a href={`mailto:${site.contactEmail}`} class="flex items-center gap-3 text-sm text-foreground-muted transition-colors hover:text-foreground">
+          <span class="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface text-accent">
+            <Icon name="mail" size={18} />
+          </span>
+          {site.contactEmail}
+        </a>
+      </div>
+    </div>
+
+    <div data-reveal data-reveal-delay="100" class="glass rounded-lg p-6 md:p-10">
+      <ContactForm client:load lang={lang} />
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-analytics="whatsapp_click"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "whatsapp_click", source: "contact_page" });
+      window.gtag?.("event", "whatsapp_click", { source: "contact_page" });
+    });
+  });
+</script>

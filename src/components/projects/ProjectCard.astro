@@ -1,0 +1,114 @@
+---
+import Icon from "@components/shared/Icon.astro";
+import type { Project } from "@/data/projects";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations, localizedPath } from "@/i18n/utils";
+import { isVideoUrl } from "@/lib/utils";
+
+interface Props {
+  project: Project;
+  index: number;
+  lang?: Locale;
+}
+
+const { project, index, lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+const copy = t.projects.items[project.id];
+
+const gradients = [
+  "from-accent/25 via-transparent to-transparent",
+  "from-accent-2/20 via-transparent to-transparent",
+  "from-accent/15 via-accent-2/10 to-transparent",
+];
+
+const categoryIcons: Record<string, string> = {
+  GIS: "map",
+  "E-commerce": "shopping-cart",
+  Fintech: "landmark",
+  "Catálogo": "layout-template",
+  "catalog": "layout-template",
+  "reseñas": "star",
+  "review": "star",
+  "avaliaç": "star",
+  Software: "layout-dashboard",
+  Apps: "smartphone",
+  Inventario: "package",
+  Inventory: "package",
+  Estoque: "package",
+};
+
+const primaryCategory = copy.category.split("·")[0].trim();
+const iconName =
+  Object.entries(categoryIcons).find(([key]) => copy.category.toLowerCase().includes(key.toLowerCase()))?.[1] ??
+  "layers";
+
+const ctaHref = project.liveUrl ?? localizedPath(`/proyectos/${project.slug}`, lang);
+const isExternal = Boolean(project.liveUrl);
+const isVideo = project.imageUrl ? isVideoUrl(project.imageUrl) : false;
+---
+
+<article class="project-card group flex flex-col overflow-hidden rounded-lg border border-border bg-surface transition-colors duration-300 hover:border-accent/40">
+  <div class={`relative flex aspect-video items-center justify-center overflow-hidden bg-gradient-to-br ${gradients[index % gradients.length]} bg-background-elevated`}>
+    {project.imageUrl ? (
+      isVideo ? (
+        <video
+          src={project.imageUrl}
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-label={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
+          class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <img
+          src={project.imageUrl}
+          alt={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      )
+    ) : (
+      <>
+        <div class="bg-grid absolute inset-0 opacity-40" aria-hidden="true"></div>
+        <Icon name={iconName} size={56} strokeWidth={1} class="text-foreground/10 transition-transform duration-500 group-hover:scale-110" />
+      </>
+    )}
+    <span class="absolute left-4 top-4 rounded-pill border border-border bg-background/70 px-3 py-1 text-[11px] font-medium tracking-wide text-foreground-muted backdrop-blur-sm">
+      {primaryCategory}
+    </span>
+  </div>
+
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="font-display text-lg font-semibold text-foreground md:text-xl">{copy.name}</h3>
+    <p class="mt-2 text-sm leading-relaxed text-foreground-muted">{copy.description}</p>
+
+    <p class="mt-4 text-xs tracking-wide text-muted">{copy.category}</p>
+
+    {project.technologies.length > 0 && (
+      <div class="mt-3 flex flex-wrap gap-2">
+        {project.technologies.map((tech) => (
+          <span class="rounded-sm border border-border px-2 py-1 text-[11px] text-foreground-muted">{tech}</span>
+        ))}
+      </div>
+    )}
+
+    <a
+      href={ctaHref}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      data-analytics="project_view"
+      data-project={project.slug}
+      class="group/link mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-accent"
+    >
+      {t.projects.viewProject}
+      {isExternal ? (
+        <Icon name="arrow-up-right" size={15} class="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+      ) : (
+        <span class="transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">→</span>
+      )}
+    </a>
+  </div>
+</article>

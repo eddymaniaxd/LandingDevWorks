@@ -1,0 +1,75 @@
+---
+import ProjectCard from "@components/projects/ProjectCard.astro";
+import { projects } from "@/data/projects";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="proyectos" class="py-24 md:py-32" aria-labelledby="projects-heading">
+  <div class="container-page">
+    <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-xl">
+        <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.projects.eyebrow}</p>
+        <h2 id="projects-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground">
+          {t.projects.heading}
+        </h2>
+      </div>
+    </div>
+
+    <div id="projects-grid" class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+      {projects.map((project, index) => (
+        <div class="project-card-wrapper">
+          <ProjectCard project={project} index={index} lang={lang} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { getGsap } from "@/lib/gsap-client";
+
+  function initProjectsReveal() {
+    const cards = document.querySelectorAll<HTMLElement>(".project-card-wrapper");
+    if (cards.length === 0) return;
+
+    const { gsap, ScrollTrigger } = getGsap();
+
+    gsap.set(cards, { opacity: 0, y: 40 });
+
+    ScrollTrigger.batch(cards, {
+      start: "top 85%",
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+        }),
+      once: true,
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProjectsReveal);
+  } else {
+    initProjectsReveal();
+  }
+
+  document.querySelectorAll('[data-analytics="project_view"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      const project = el.getAttribute("data-project");
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "project_view", project });
+      window.gtag?.("event", "project_view", { project });
+    });
+  });
+</script>

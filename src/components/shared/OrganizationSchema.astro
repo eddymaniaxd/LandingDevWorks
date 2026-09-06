@@ -1,0 +1,41 @@
+---
+import { site } from "@/lib/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: site.url,
+  logo: new URL("/icon-512.png", site.url).toString(),
+  description:
+    "Dev Works desarrolla soluciones digitales a medida: sitios web, e-commerce, software empresarial, aplicaciones móviles y sistemas GIS.",
+  email: site.contactEmail,
+  sameAs: [site.linkedinUrl].filter(Boolean),
+  ...(site.whatsapp.isConfigured
+    ? {
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "sales",
+            telephone: `+${site.whatsapp.number}`,
+            areaServed: "BO",
+            availableLanguage: ["es", "en", "pt"],
+          },
+        ],
+      }
+    : {}),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Desarrollo de software y soluciones digitales",
+  provider: { "@type": "Organization", name: site.name, url: site.url },
+  areaServed: "BO",
+  description:
+    "Desarrollo web, e-commerce, software empresarial, aplicaciones móviles, sistemas GIS y automatización de procesos.",
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />

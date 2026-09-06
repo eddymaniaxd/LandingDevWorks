@@ -1,0 +1,22 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HomeBody from "@components/pages/HomeBody.astro";
+import { useTranslations } from "@/i18n/utils";
+
+// SSR (no prerender): esta ruta corre la detección de idioma por IP en
+// src/middleware.ts en cada visita (ver ese archivo para el detalle de por
+// qué el middleware solo se ejecuta en rutas on-demand). El resto del sitio
+// permanece estático.
+export const prerender = false;
+
+const t = useTranslations("es");
+---
+
+<Layout
+  title={t.meta.home.title}
+  description={t.meta.home.description}
+  path="/"
+  lang="es"
+>
+  <HomeBody lang="es" />
+</Layout>

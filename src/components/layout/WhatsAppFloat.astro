@@ -1,0 +1,37 @@
+---
+import Icon from "@components/shared/Icon.astro";
+import { site } from "@/lib/site";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+
+// Si no hay número real configurado, no se muestra un CTA falso.
+if (!site.whatsapp.isConfigured) return null;
+---
+
+<a
+  href={site.whatsapp.href}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-analytics="whatsapp_click"
+  aria-label={t.whatsappFloat.ariaLabel}
+  class="glow-accent fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-soft transition-transform hover:scale-105 active:scale-95 md:bottom-8 md:right-8"
+>
+  <Icon name="message-circle" size={26} strokeWidth={1.75} class="text-white" />
+</a>
+
+<script>
+  document.querySelectorAll('[data-analytics="whatsapp_click"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "whatsapp_click", source: "float" });
+      window.gtag?.("event", "whatsapp_click", { source: "float" });
+    });
+  });
+</script>

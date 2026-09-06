@@ -1,0 +1,72 @@
+---
+import Icon from "@components/shared/Icon.astro";
+import type { Service } from "@/data/services";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  service: Service;
+  index: number;
+  lang?: Locale;
+}
+
+const { service, index, lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+const copy = t.services.items[service.id];
+---
+
+<article
+  data-reveal
+  data-reveal-delay={index * 80}
+  data-analytics="service_click"
+  data-service={service.id}
+  class="group relative flex flex-col justify-between overflow-hidden rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-surface-hover md:p-7"
+>
+  <!-- Glow que aparece con hover -->
+  <div
+    class="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/0 blur-3xl transition-colors duration-500 group-hover:bg-accent/25"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div>
+    <div class="flex items-center justify-between">
+      <span class="font-mono text-xs text-muted">{service.number}</span>
+      <span
+        class="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-foreground-muted transition-colors duration-300 group-hover:border-accent/40 group-hover:text-accent"
+      >
+        <Icon name={service.icon} size={18} />
+      </span>
+    </div>
+
+    <h3 class="mt-5 font-display text-xl font-semibold text-foreground md:text-2xl">
+      {copy.title}
+    </h3>
+
+    <!-- Descripción base: siempre visible (mobile no depende de hover) -->
+    <p class="mt-3 text-sm leading-relaxed text-foreground-muted">
+      {copy.description}
+    </p>
+
+    <!-- Detalle adicional: se revela solo con hover en desktop -->
+    <p
+      class="mt-0 max-h-0 overflow-hidden text-sm leading-relaxed text-foreground-muted opacity-0 transition-all duration-300 md:group-hover:mt-2 md:group-hover:max-h-24 md:group-hover:opacity-100"
+    >
+      {copy.longDescription}
+    </p>
+  </div>
+
+  <div class="mt-6 flex items-center justify-between border-t border-border pt-5">
+    <div class="flex flex-wrap gap-x-3 gap-y-1">
+      {copy.tags.map((tag) => (
+        <span class="text-xs text-muted">{tag}</span>
+      ))}
+    </div>
+    <span
+      class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-foreground-muted transition-all duration-300 group-hover:translate-x-1 group-hover:bg-accent group-hover:text-white"
+      aria-hidden="true"
+    >
+      →
+    </span>
+  </div>
+</article>

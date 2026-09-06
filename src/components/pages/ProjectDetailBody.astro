@@ -1,0 +1,121 @@
+---
+import Icon from "@components/shared/Icon.astro";
+import type { Project } from "@/data/projects";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations, localizedPath } from "@/i18n/utils";
+import { isVideoUrl } from "@/lib/utils";
+
+interface Props {
+  project: Project;
+  lang?: Locale;
+}
+
+const { project, lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+const copy = t.projects.items[project.id];
+
+const sections = [
+  { title: t.caseStudy.sections.problem.title, body: t.caseStudy.sections.problem.body },
+  { title: t.caseStudy.sections.context.title, body: t.caseStudy.sections.context.body },
+  { title: t.caseStudy.sections.solution.title, body: copy.description },
+  { title: t.caseStudy.sections.process.title, body: t.caseStudy.sections.process.body },
+  { title: t.caseStudy.sections.results.title, body: t.caseStudy.sections.results.body },
+];
+
+const projectsHref = `${localizedPath("/", lang)}#proyectos`;
+const contactHref = localizedPath("/contacto", lang);
+const isVideo = project.imageUrl ? isVideoUrl(project.imageUrl) : false;
+---
+
+<article class="pt-28 md:pt-36">
+  <header class="container-page">
+    <a href={projectsHref} class="inline-flex items-center gap-2 text-sm text-foreground-muted transition-colors hover:text-foreground">
+      <span aria-hidden="true">←</span> {t.caseStudy.backToProjects}
+    </a>
+
+    <p class="mt-8 text-sm font-medium tracking-[0.14em] text-accent">{copy.category}</p>
+    <h1 class="mt-4 max-w-3xl font-display text-h2 font-semibold text-foreground">{copy.name}</h1>
+    <p class="mt-5 max-w-2xl text-body-lg leading-relaxed text-foreground-muted">{copy.description}</p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      {project.technologies.map((tech) => (
+        <span class="rounded-sm border border-border px-2.5 py-1 text-xs text-foreground-muted">{tech}</span>
+      ))}
+      {project.liveUrl && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover"
+        >
+          {t.caseStudy.visitSite}
+          <Icon name="arrow-up-right" size={14} />
+        </a>
+      )}
+    </div>
+  </header>
+
+  <div class="container-page mt-12">
+    {project.imageUrl ? (
+      <div class="glass w-full overflow-hidden rounded-lg">
+        {isVideo ? (
+          <video
+            src={project.imageUrl}
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+            aria-label={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
+            class="w-full object-cover"
+          />
+        ) : (
+          <img
+            src={project.imageUrl}
+            alt={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
+            class="w-full object-cover"
+            loading="eager"
+          />
+        )}
+      </div>
+    ) : (
+      <div class="glass flex aspect-video w-full items-center justify-center rounded-lg">
+        <div class="flex flex-col items-center gap-3 text-muted">
+          <Icon name="image" size={32} strokeWidth={1.5} />
+          <span class="text-sm">{t.caseStudy.imagePending}</span>
+        </div>
+      </div>
+    )}
+  </div>
+
+  <div class="container-page mt-16 grid gap-12 pb-24 md:grid-cols-[200px_1fr] md:pb-32">
+    <nav class="hidden md:block" aria-label={t.caseStudy.sectionsNavLabel}>
+      <ul class="sticky top-28 space-y-3 text-sm text-foreground-muted">
+        {sections.map((section) => (
+          <li>{section.title}</li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="space-y-12">
+      {sections.map((section) => (
+        <section>
+          <h2 class="font-display text-2xl font-semibold text-foreground">{section.title}</h2>
+          <p class="mt-3 max-w-2xl text-sm leading-relaxed text-foreground-muted md:text-base">{section.body}</p>
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <section class="border-t border-border bg-background-elevated py-20">
+    <div class="container-page flex flex-col items-center gap-6 text-center">
+      <h2 class="max-w-xl font-display text-3xl font-semibold text-foreground">{t.caseStudy.ctaHeading}</h2>
+      <a
+        href={contactHref}
+        class="inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+      >
+        {t.caseStudy.ctaButton} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</article>

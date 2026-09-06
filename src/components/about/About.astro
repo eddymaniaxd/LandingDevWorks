@@ -1,0 +1,27 @@
+---
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="nosotros" class="border-y border-border bg-background-elevated py-24 md:py-32" aria-labelledby="about-heading">
+  <div class="container-page max-w-3xl">
+    <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.about.eyebrow}</p>
+    <h2 id="about-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground text-balance">
+      {t.about.heading}
+    </h2>
+
+    <p data-reveal data-reveal-delay="120" class="mt-6 text-body-lg leading-relaxed text-foreground-muted">
+      {t.about.p1}
+    </p>
+    <p data-reveal data-reveal-delay="180" class="mt-4 text-body-lg leading-relaxed text-foreground-muted">
+      {t.about.p2}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+---
+import Icon from "@components/shared/Icon.astro";
+import { site } from "@/lib/site";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations, localizedPath } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="cta-final" class="relative overflow-hidden py-28 md:py-36" aria-labelledby="cta-heading">
+  <div class="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-50" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[720px] -translate-x-1/2 rounded-full opacity-30 blur-[140px]"
+    style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page flex flex-col items-center text-center">
+    <h2 id="cta-heading" data-reveal class="max-w-2xl font-display text-h2 font-semibold text-foreground text-balance">
+      {t.cta.heading}
+    </h2>
+    <p data-reveal data-reveal-delay="80" class="mt-6 max-w-lg text-body-lg leading-relaxed text-foreground-muted">
+      {t.cta.description}
+    </p>
+
+    <div data-reveal data-reveal-delay="160" class="mt-10 flex flex-col gap-4 sm:flex-row">
+      <a
+        href={localizedPath("/contacto", lang)}
+        data-analytics="hero_cta_click"
+        class="group inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-8 py-4 text-sm font-medium text-white shadow-soft transition-all hover:bg-accent-hover"
+      >
+        {t.cta.ctaPrimary}
+        <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+      </a>
+
+      {site.whatsapp.isConfigured && (
+        <a
+          href={site.whatsapp.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics="whatsapp_click"
+          class="inline-flex items-center justify-center gap-2 rounded-pill border border-border-strong px-8 py-4 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-surface"
+        >
+          <Icon name="message-circle" size={16} />
+          {t.cta.whatsapp}
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('#cta-final [data-analytics]').forEach((el) => {
+    el.addEventListener("click", (e) => {
+      const eventName = (e.currentTarget as HTMLElement).getAttribute("data-analytics");
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: eventName, source: "final_cta" });
+      window.gtag?.("event", eventName, { source: "final_cta" });
+    });
+  });
+</script>

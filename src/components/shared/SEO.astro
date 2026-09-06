@@ -1,0 +1,64 @@
+---
+import { site } from "@/lib/site";
+import { locales, defaultLocale, localeHtmlLang, type Locale } from "@/i18n/config";
+import { localizedPath, useTranslations } from "@/i18n/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Ruta canónica SIN prefijo de idioma, p. ej. "/", "/contacto",
+   * "/proyectos/mi-slug". Se usa para construir la URL canónica del idioma
+   * actual y las alternates hreflang de los demás idiomas. */
+  path?: string;
+  image?: string;
+  noindex?: boolean;
+  lang?: Locale;
+}
+
+const {
+  title,
+  description,
+  path = "/",
+  image = "/og-image.png",
+  noindex = false,
+  lang = defaultLocale,
+} = Astro.props;
+
+const canonicalURL = new URL(localizedPath(path, lang), site.url).toString();
+const imageURL = new URL(image, site.url).toString();
+const fullTitle = path === "/" ? title : `${title} · ${site.name}`;
+const t = useTranslations(lang);
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Alternates de idioma: le indican a los buscadores que existen versiones
+     equivalentes de esta página en otros idiomas. -->
+{locales.map((locale) => (
+  <link
+    rel="alternate"
+    hreflang={localeHtmlLang[locale]}
+    href={new URL(localizedPath(path, locale), site.url).toString()}
+  />
+))}
+<link rel="alternate" hreflang="x-default" href={new URL(localizedPath(path, defaultLocale), site.url).toString()} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content={t.seo.ogLocale} />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />

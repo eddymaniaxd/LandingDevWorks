@@ -1,0 +1,16 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ContactBody from "@components/pages/ContactBody.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const t = useTranslations("pt");
+---
+
+<Layout
+  title={t.meta.contact.title}
+  description={t.meta.contact.description}
+  path="/contacto"
+  lang="pt"
+>
+  <ContactBody lang="pt" />
+</Layout>

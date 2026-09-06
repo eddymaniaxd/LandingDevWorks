@@ -1,0 +1,16 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HomeBody from "@components/pages/HomeBody.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const t = useTranslations("pt");
+---
+
+<Layout
+  title={t.meta.home.title}
+  description={t.meta.home.description}
+  path="/"
+  lang="pt"
+>
+  <HomeBody lang="pt" />
+</Layout>

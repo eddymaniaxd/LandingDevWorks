@@ -1,0 +1,36 @@
+---
+/**
+ * Icono estático (0 JS): inlinea el SVG de lucide-static en build time.
+ * Usar SOLO para iconos no interactivos dentro de componentes .astro.
+ * Los islands de React usan `lucide-react` directamente.
+ */
+import fs from "node:fs";
+import path from "node:path";
+
+interface Props {
+  name: string;
+  size?: number;
+  strokeWidth?: number;
+  class?: string;
+  "aria-hidden"?: boolean;
+}
+
+const { name, size = 20, strokeWidth = 1.75, class: className = "" } = Astro.props;
+
+let svg = "";
+try {
+  const iconPath = path.join(process.cwd(), "node_modules", "lucide-static", "icons", `${name}.svg`);
+  svg = fs.readFileSync(iconPath, "utf-8");
+} catch {
+  svg = "";
+}
+
+// Ajustar atributos raíz: tamaño, stroke-width y clases sin depender de JS.
+svg = svg
+  .replace(/width="24"/, `width="${size}"`)
+  .replace(/height="24"/, `height="${size}"`)
+  .replace(/stroke-width="2"/, `stroke-width="${strokeWidth}"`)
+  .replace("<svg", `<svg class="${className}" aria-hidden="true" focusable="false"`);
+---
+
+{svg ? <Fragment set:html={svg} /> : <span class={className} style={`display:inline-block;width:${size}px;height:${size}px`} />}

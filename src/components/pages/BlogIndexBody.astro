@@ -1,0 +1,77 @@
+---
+import BlogCard from "@components/blog/BlogCard.astro";
+import type { CollectionEntry } from "astro:content";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  posts: { entry: CollectionEntry<"blog">; postSlug: string }[];
+  lang?: Locale;
+}
+
+const { posts, lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="pt-28 pb-24 md:pt-36 md:pb-32">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.blog.eyebrow}</p>
+      <h1 class="font-display text-h2 font-semibold text-foreground">{t.blog.heading}</h1>
+      <p class="mt-5 text-body-lg leading-relaxed text-foreground-muted">{t.blog.description}</p>
+    </div>
+
+    {posts.length > 0 ? (
+      <div id="blog-grid" class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map(({ entry, postSlug }, index) => (
+          <div class="blog-card-wrapper">
+            <BlogCard entry={entry} postSlug={postSlug} index={index} lang={lang} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="mt-14 text-sm text-foreground-muted">{t.blog.emptyState}</p>
+    )}
+  </div>
+</section>
+
+<script>
+  import { getGsap } from "@/lib/gsap-client";
+
+  function initBlogReveal() {
+    const cards = document.querySelectorAll<HTMLElement>(".blog-card-wrapper");
+    if (cards.length === 0) return;
+
+    const { gsap, ScrollTrigger } = getGsap();
+
+    gsap.set(cards, { opacity: 0, y: 40 });
+
+    ScrollTrigger.batch(cards, {
+      start: "top 85%",
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+        }),
+      once: true,
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogReveal);
+  } else {
+    initBlogReveal();
+  }
+
+  document.querySelectorAll('[data-analytics="blog_post_view"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      const post = el.getAttribute("data-post");
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "blog_post_view", post });
+      window.gtag?.("event", "blog_post_view", { post });
+    });
+  });
+</script>

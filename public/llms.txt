@@ -1,0 +1,34 @@
+# Dev Works
+
+> Estudio de desarrollo de software en Bolivia. Convertimos ideas en soluciones digitales que hacen crecer tu negocio: desarrollo web, e-commerce, software empresarial, aplicaciones móviles, GIS y automatización.
+
+Dev Works diseña y construye productos digitales a medida para empresas y emprendedores en Bolivia y LatAm. El equipo trabaja con un proceso de cinco pasos (descubrir, diseñar, desarrollar, medir, mejorar) y stack moderno (Astro, Next.js, React, Node.js, Laravel, PostgreSQL, entre otros).
+
+## Servicios
+
+- Desarrollo Web — sitios corporativos, landing pages y plataformas.
+- E-commerce — tiendas conectadas con catálogo, inventario y pagos.
+- Software empresarial — sistemas comerciales, dashboards, CRM/ERP a medida.
+- Aplicaciones móviles — Android, iOS e híbridas.
+- GIS & Mapas — mapas interactivos y visualización de datos geográficos.
+- Automatización — integración de APIs y flujos entre herramientas.
+
+## Proyectos
+
+- [ALPHI Technology — catálogo técnico B2B](https://devworks.lat/proyectos/alphitech-catalogo-tecnico): catálogo web filtrable para un fabricante de electrónica industrial y de defensa.
+- [Vic Myers Associates — catálogo B2B](https://devworks.lat/proyectos/vicmyers-catalogo-b2b): catálogo para una representante de fabricantes de tecnología aeroespacial y de defensa.
+- [Bantokens — plataforma fintech](https://devworks.lat/proyectos/bantokens-fintech): landing de una plataforma de pagos y monetización para creadores de contenido.
+- [Photofloh — portal de reseñas](https://devworks.lat/proyectos/photofloh-resenas): página de feedback para un estudio de fotografía profesional.
+- [Sistema administrativo interno](https://devworks.lat/proyectos/sistema-administrativo): sistema a medida para la gestión interna de operaciones de un negocio.
+- [Sistema de inventario](https://devworks.lat/proyectos/sistema-inventario): control de stock (entradas, salidas, devoluciones, lotes, vencimientos) para una empresa en México.
+
+## Blog
+
+- [Cómo construimos un sistema de inventario a medida](https://devworks.lat/blog/sistema-inventario-mexico)
+- [Astro, WordPress o Next.js: qué tecnología conviene](https://devworks.lat/blog/astro-wordpress-nextjs)
+
+## Contacto
+
+- Sitio: https://devworks.lat
+- Formulario de contacto: https://devworks.lat/contacto
+- English: https://devworks.lat/en — Português: https://devworks.lat/pt

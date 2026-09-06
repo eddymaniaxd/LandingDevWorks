@@ -1,0 +1,17 @@
+---
+import Layout from "@layouts/Layout.astro";
+import BlogIndexBody from "@components/pages/BlogIndexBody.astro";
+import { getCollection } from "astro:content";
+import { useTranslations } from "@/i18n/utils";
+
+const t = useTranslations("pt");
+
+const entries = await getCollection("blog", (entry) => entry.slug.startsWith("pt/") && !entry.data.draft);
+const posts = entries
+  .map((entry) => ({ entry, postSlug: entry.slug.replace(/^pt\//, "") }))
+  .sort((a, b) => b.entry.data.publishDate.valueOf() - a.entry.data.publishDate.valueOf());
+---
+
+<Layout title={t.meta.blog.title} description={t.meta.blog.description} path="/blog" lang="pt">
+  <BlogIndexBody posts={posts} lang="pt" />
+</Layout>

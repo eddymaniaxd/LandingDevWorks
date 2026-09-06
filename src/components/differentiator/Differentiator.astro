@@ -1,0 +1,50 @@
+---
+import Icon from "@components/shared/Icon.astro";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+
+const pillars = [
+  { icon: "search", label: t.differentiator.pillars.consultoria },
+  { icon: "chart-column", label: t.differentiator.pillars.analisis },
+  { icon: "pencil-ruler", label: t.differentiator.pillars.diseno },
+  { icon: "code", label: t.differentiator.pillars.desarrollo },
+  { icon: "refresh-cw", label: t.differentiator.pillars.mejora },
+];
+---
+
+<section class="border-y border-border bg-background-elevated py-24 md:py-32" aria-labelledby="diff-heading">
+  <div class="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
+    <div>
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.differentiator.eyebrow}</p>
+      <h2 id="diff-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground text-balance">
+        {t.differentiator.heading}
+      </h2>
+    </div>
+
+    <div class="flex flex-col justify-center">
+      <p data-reveal data-reveal-delay="120" class="text-body-lg leading-relaxed text-foreground-muted">
+        {t.differentiator.description}
+      </p>
+
+      <ul class="mt-10 flex flex-wrap gap-3">
+        {pillars.map((pillar, index) => (
+          <li
+            data-reveal
+            data-reveal-delay={160 + index * 60}
+            class="flex items-center gap-2 rounded-pill border border-border bg-surface px-4 py-2 text-sm text-foreground-muted"
+          >
+            <Icon name={pillar.icon} size={15} class="text-accent" />
+            {pillar.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

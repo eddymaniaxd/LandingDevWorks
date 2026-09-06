@@ -1,0 +1,74 @@
+---
+import SEO from "@components/shared/SEO.astro";
+import OrganizationSchema from "@components/shared/OrganizationSchema.astro";
+import Navbar from "@components/layout/Navbar.astro";
+import Footer from "@components/layout/Footer.astro";
+import WhatsAppFloat from "@components/layout/WhatsAppFloat.astro";
+import { defaultLocale, localeHtmlLang, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+  noindex?: boolean;
+  lang?: Locale;
+}
+
+const { title, description, path, image, noindex, lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+
+<!doctype html>
+<html lang={localeHtmlLang[lang]}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#08080a" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <SEO title={title} description={description} path={path} image={image} noindex={noindex} lang={lang} />
+    <OrganizationSchema />
+
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} is:inline></script>
+        <script define:vars={{ gaId }} is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaId, { anonymize_ip: true });
+          window.gtag = gtag;
+        </script>
+      </>
+    )}
+  </head>
+  <body class="bg-background text-foreground antialiased">
+    <a href="#main-content" class="sr-only-focusable fixed left-4 top-4 z-[100] rounded-md bg-accent px-4 py-2 text-sm font-medium text-white">
+      {t.skipToContent}
+    </a>
+
+    <Navbar lang={lang} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+    <WhatsAppFloat lang={lang} />
+
+    <script>
+      import { initReveal } from "@/lib/reveal-client";
+      initReveal();
+    </script>
+  </body>
+</html>

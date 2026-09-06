@@ -1,0 +1,27 @@
+---
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="border-y border-border bg-background-elevated py-16 md:py-20" aria-labelledby="trust-heading">
+  <div class="container-page">
+    <h2 id="trust-heading" class="text-center font-display text-h3 font-semibold text-foreground">
+      {t.trust.heading}
+    </h2>
+
+    <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:mt-12 md:gap-x-14">
+      {t.trust.categories.map((category) => (
+        <li class="text-sm font-medium tracking-[0.14em] text-muted transition-colors hover:text-foreground-muted">
+          {category}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

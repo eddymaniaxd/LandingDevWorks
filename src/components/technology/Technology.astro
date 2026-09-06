@@ -1,0 +1,36 @@
+---
+import { technologies } from "@/data/technologies";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="py-24 md:py-32" aria-labelledby="tech-heading">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.technology.eyebrow}</p>
+      <h2 id="tech-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground">
+        {t.technology.heading}
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {technologies.map((group, index) => (
+        <div data-reveal data-reveal-delay={index * 80} class="rounded-lg border border-border bg-surface p-6">
+          <h3 class="text-sm font-medium tracking-wide text-muted">{t.technology.groups[group.id]}</h3>
+          <ul class="mt-4 space-y-2.5">
+            {group.items.map((item) => (
+              <li class="text-sm text-foreground-muted">{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

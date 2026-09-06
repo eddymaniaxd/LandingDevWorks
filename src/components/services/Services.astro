@@ -1,0 +1,44 @@
+---
+import ServiceCard from "@components/services/ServiceCard.astro";
+import { services } from "@/data/services";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="servicios" class="py-24 md:py-32" aria-labelledby="services-heading">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{t.services.eyebrow}</p>
+      <h2 id="services-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground">
+        {t.services.heading}
+      </h2>
+      <p data-reveal data-reveal-delay="120" class="mt-5 text-body-lg leading-relaxed text-foreground-muted">
+        {t.services.description}
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((service, index) => (
+        <ServiceCard service={service} index={index} lang={lang} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-analytics="service_click"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      const serviceId = el.getAttribute("data-service");
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "service_click", service: serviceId });
+      window.gtag?.("event", "service_click", { service: serviceId });
+    });
+  });
+</script>

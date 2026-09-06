@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Icon from "@components/shared/Icon.astro";
+import { defaultLocale, localeHtmlLang, type Locale } from "@/i18n/config";
+import { useTranslations, localizedPath } from "@/i18n/utils";
+import { estimateReadingMinutes, formatPostDate } from "@/lib/utils";
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+  lang?: Locale;
+}
+
+const { entry, lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await entry.render();
+
+const minutes = estimateReadingMinutes(entry.body);
+const dateLabel = formatPostDate(entry.data.publishDate, localeHtmlLang[lang]);
+const blogHref = localizedPath("/blog", lang);
+const contactHref = localizedPath("/contacto", lang);
+---
+
+<article class="pt-28 md:pt-36">
+  <header class="container-page">
+    <a href={blogHref} class="inline-flex items-center gap-2 text-sm text-foreground-muted transition-colors hover:text-foreground">
+      <span aria-hidden="true">←</span> {t.blog.backToBlog}
+    </a>
+
+    <p class="mt-8 text-sm font-medium tracking-[0.14em] text-accent">{entry.data.category}</p>
+    <h1 class="mt-4 max-w-3xl font-display text-h2 font-semibold text-foreground">{entry.data.title}</h1>
+    <p class="mt-5 max-w-2xl text-body-lg leading-relaxed text-foreground-muted">{entry.data.description}</p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted">
+      <span class="inline-flex items-center gap-1.5">
+        <Icon name="calendar" size={14} />
+        {t.blog.publishedOn} {dateLabel}
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <Icon name="clock" size={14} />
+        {minutes} {t.blog.minReadSuffix}
+      </span>
+    </div>
+  </header>
+
+  {entry.data.coverImage && (
+    <div class="container-page mt-10">
+      <div class="glass w-full overflow-hidden rounded-lg">
+        <img src={entry.data.coverImage} alt="" class="w-full object-cover" loading="eager" />
+      </div>
+    </div>
+  )}
+
+  <div class="container-page mt-14 pb-24 md:pb-32">
+    <div class="prose-post">
+      <Content />
+    </div>
+  </div>
+
+  <section class="border-t border-border bg-background-elevated py-20">
+    <div class="container-page flex flex-col items-center gap-6 text-center">
+      <h2 class="max-w-xl font-display text-3xl font-semibold text-foreground">{t.caseStudy.ctaHeading}</h2>
+      <a
+        href={contactHref}
+        class="inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+      >
+        {t.caseStudy.ctaButton} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</article>

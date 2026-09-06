@@ -1,0 +1,30 @@
+---
+import Hero from "@components/hero/Hero.astro";
+import Trust from "@components/trust/Trust.astro";
+import Services from "@components/services/Services.astro";
+import Differentiator from "@components/differentiator/Differentiator.astro";
+import Process from "@components/process/Process.astro";
+import GisShowcase from "@components/gis/GisShowcase.astro";
+import Projects from "@components/projects/Projects.astro";
+import Technology from "@components/technology/Technology.astro";
+import About from "@components/about/About.astro";
+import CTA from "@components/cta/CTA.astro";
+import { defaultLocale, type Locale } from "@/i18n/config";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+---
+
+<Hero lang={lang} />
+<Trust lang={lang} />
+<Services lang={lang} />
+<Differentiator lang={lang} />
+<Process lang={lang} />
+<GisShowcase lang={lang} />
+<Projects lang={lang} />
+<Technology lang={lang} />
+<About lang={lang} />
+<CTA lang={lang} />
