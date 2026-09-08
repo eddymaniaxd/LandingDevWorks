@@ -34,6 +34,7 @@ const href = localizedPath(`/blog/${postSlug}`, lang);
         alt=""
         loading="lazy"
         decoding="async"
+        style={entry.data.coverImagePosition ? `object-position: ${entry.data.coverImagePosition}` : undefined}
         class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
     ) : (

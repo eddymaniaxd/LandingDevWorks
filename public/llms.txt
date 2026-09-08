@@ -15,6 +15,7 @@ Dev Works diseña y construye productos digitales a medida para empresas y empre
 
 ## Proyectos
 
+- [Sistema de Mapas Comerciales — venta de lotes](https://devworks.lat/proyectos/sistema-mapas-comerciales): mapa interactivo para gestionar y vender lotes de urbanizaciones, con estado en tiempo real, reservas y simulador de pago. Una de las soluciones que más hemos implementado para clientes del sector inmobiliario.
 - [ALPHI Technology — catálogo técnico B2B](https://devworks.lat/proyectos/alphitech-catalogo-tecnico): catálogo web filtrable para un fabricante de electrónica industrial y de defensa.
 - [Vic Myers Associates — catálogo B2B](https://devworks.lat/proyectos/vicmyers-catalogo-b2b): catálogo para una representante de fabricantes de tecnología aeroespacial y de defensa.
 - [Bantokens — plataforma fintech](https://devworks.lat/proyectos/bantokens-fintech): landing de una plataforma de pagos y monetización para creadores de contenido.
@@ -24,6 +25,7 @@ Dev Works diseña y construye productos digitales a medida para empresas y empre
 
 ## Blog
 
+- [Sistema de Mapas Comerciales: cómo digitalizamos la venta de lotes](https://devworks.lat/blog/sistema-mapas-comerciales)
 - [Cómo construimos un sistema de inventario a medida](https://devworks.lat/blog/sistema-inventario-mexico)
 - [Astro, WordPress o Next.js: qué tecnología conviene](https://devworks.lat/blog/astro-wordpress-nextjs)
 

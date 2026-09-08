@@ -25,5 +25,12 @@ export function estimateReadingMinutes(rawBody: string): number {
 /** Formatea una fecha en el idioma del sitio (es/en/pt), p. ej. "5 de
  * septiembre de 2026" / "September 5, 2026" / "5 de setembro de 2026". */
 export function formatPostDate(date: Date, htmlLang: string): string {
-  return new Intl.DateTimeFormat(htmlLang, { year: "numeric", month: "long", day: "numeric" }).format(date);
+  // timeZone: "UTC" es intencional — publishDate viene de un frontmatter tipo
+  // fecha ("2026-09-08"), que Astro/Zod interpreta como medianoche UTC. Sin
+  // fijar la zona, el servidor formatea en su propia hora local y, si está
+  // detrás de UTC (como Bolivia, UTC-4), el resultado muestra el día
+  // anterior.
+  return new Intl.DateTimeFormat(htmlLang, { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(
+    date,
+  );
 }

@@ -88,7 +88,7 @@ export default function HeroVisual({ lang = defaultLocale }: HeroVisualProps) {
 
       {/* Card: dashboard / gráfico */}
       <div
-        className="glass animate-float-slow absolute left-0 top-6 w-[62%] rounded-lg p-4 shadow-soft sm:top-10"
+        className="glass animate-float-slow absolute left-0 top-6 w-[52%] rounded-lg p-4 shadow-soft sm:top-10"
         style={{
           transform: `translate(${offset.x}px, ${offset.y}px)`,
           transition: "transform 0.3s ease-out",
@@ -111,7 +111,7 @@ export default function HeroVisual({ lang = defaultLocale }: HeroVisualProps) {
 
       {/* Card: código */}
       <div
-        className="glass animate-float-slower absolute right-0 top-0 w-[58%] rounded-lg p-4 font-mono text-[11px] leading-relaxed shadow-soft sm:top-2"
+        className="glass animate-float-slower absolute right-0 top-16 w-[48%] rounded-lg p-4 font-mono text-[11px] leading-relaxed shadow-soft sm:top-20"
         style={{
           transform: `translate(${offset.x * -1}px, ${offset.y * -1}px)`,
           transition: "transform 0.3s ease-out",

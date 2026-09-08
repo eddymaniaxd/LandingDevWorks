@@ -1,7 +1,7 @@
 ---
 import Icon from "@components/shared/Icon.astro";
 import { defaultLocale, type Locale } from "@/i18n/config";
-import { useTranslations } from "@/i18n/utils";
+import { useTranslations, localizedPath } from "@/i18n/utils";
 
 interface Props {
   lang?: Locale;
@@ -45,6 +45,16 @@ const activeMarker = { x: 58, y: 24 };
           </li>
         ))}
       </ul>
+
+      <a
+        href={localizedPath("/proyectos/sistema-mapas-comerciales", lang)}
+        data-reveal
+        data-reveal-delay="220"
+        class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+      >
+        {t.gis.ctaLabel}
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
 
     <div data-reveal data-reveal-delay="120" class="relative">

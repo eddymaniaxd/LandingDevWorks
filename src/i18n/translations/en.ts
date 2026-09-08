@@ -5,7 +5,7 @@ export const en: Dictionary = {
     home: {
       title: "Dev Works — Digital solutions that grow your business",
       description:
-        "Web development, e-commerce, business software, applications and GIS solutions. We turn ideas into digital solutions that grow your business.",
+        "Commercial lot-mapping systems for real estate, web development, e-commerce, business software, and GIS solutions. We turn ideas into digital solutions that grow your business.",
     },
     contact: {
       title: "Contact",
@@ -34,7 +34,7 @@ export const en: Dictionary = {
     badge: "Software · Design · Automation",
     title: "We turn ideas into digital solutions that grow your business.",
     description:
-      "Web development, e-commerce, business software, applications and GIS solutions designed to solve real problems.",
+      "Commercial lot-mapping systems for real estate, web development, e-commerce, business software, and GIS solutions designed to solve real problems.",
     ctaPrimary: "Let's talk about your project",
     ctaSecondary: "See projects",
   },
@@ -95,6 +95,14 @@ export const en: Dictionary = {
         longDescription:
           "We integrate APIs and automate workflows between the tools your team already uses, eliminating repetitive tasks and reducing human error in operational processes.",
         tags: ["APIs", "Integrations", "Automations", "Business workflows"],
+      },
+      "agentes-ia": {
+        title: "AI Agents",
+        description:
+          "AI-powered assistants and automations that handle customer questions and run tasks for your team.",
+        longDescription:
+          "We design AI agents connected to your data and tools — from chatbots that answer questions and book appointments to internal assistants that handle repetitive tasks — so your team spends time on what actually needs a person.",
+        tags: ["Chatbots", "AI Assistants", "AI Automation", "Integrations"],
       },
     },
   },
@@ -160,12 +168,19 @@ export const en: Dictionary = {
       available: "Available",
       viewInfo: "View details",
     },
+    ctaLabel: "See the real case",
   },
   projects: {
     eyebrow: "PROJECTS",
     heading: "Projects that speak for us.",
     viewProject: "View project",
     items: {
+      "sistema-mapas-comerciales": {
+        name: "Commercial Lot-Mapping System",
+        description:
+          "One of Dev Works' internal systems: a platform with an interactive map to manage and sell lots for real estate developments. Each lot is color-coded by status (available, reserved, or sold), with pricing and area details, online reservations, and a payment simulator. It's one of the solutions we've built most often for real estate clients.",
+        category: "GIS & Maps · Case study",
+      },
       alphitech: {
         name: "Technical product catalog — ALPHI Technology",
         description:
@@ -252,6 +267,7 @@ export const en: Dictionary = {
       "Applications",
       "GIS & Maps",
       "Automation",
+      "AI Agents",
       "Other",
     ],
     labels: {

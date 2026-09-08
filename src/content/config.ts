@@ -21,6 +21,10 @@ const blog = defineCollection({
      * 3 versiones de idioma de un mismo post — es una ilustración, no
      * depende del texto. */
     coverImage: z.string().optional(),
+    /** object-position CSS opcional para coverImage, para fotos/gráficos
+     * anchos (p. ej. capturas reales) donde el recorte centrado por defecto
+     * corta texto o contenido importante en la miniatura de la tarjeta. */
+    coverImagePosition: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

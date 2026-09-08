@@ -59,6 +59,7 @@ const isVideo = project.imageUrl ? isVideoUrl(project.imageUrl) : false;
           playsinline
           preload="metadata"
           aria-label={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
+          style={project.imagePosition ? `object-position: ${project.imagePosition}` : undefined}
           class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
@@ -67,6 +68,7 @@ const isVideo = project.imageUrl ? isVideoUrl(project.imageUrl) : false;
           alt={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
           loading="lazy"
           decoding="async"
+          style={project.imagePosition ? `object-position: ${project.imagePosition}` : undefined}
           class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       )

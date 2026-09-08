@@ -3,7 +3,7 @@ export const es = {
     home: {
       title: "Dev Works — Soluciones digitales que hacen crecer tu negocio",
       description:
-        "Desarrollo web, e-commerce, software empresarial, aplicaciones y soluciones GIS. Convertimos ideas en soluciones digitales que hacen crecer tu negocio.",
+        "Sistemas de mapas comerciales para inmobiliarias, desarrollo web, e-commerce, software empresarial y soluciones GIS. Convertimos ideas en soluciones digitales que hacen crecer tu negocio.",
     },
     contact: {
       title: "Contacto",
@@ -32,7 +32,7 @@ export const es = {
     badge: "Software · Diseño · Automatización",
     title: "Convertimos ideas en soluciones digitales que hacen crecer tu negocio.",
     description:
-      "Desarrollo web, e-commerce, software empresarial, aplicaciones y soluciones GIS diseñadas para resolver problemas reales.",
+      "Sistemas de mapas comerciales para inmobiliarias, desarrollo web, e-commerce, software empresarial y soluciones GIS diseñadas para resolver problemas reales.",
     ctaPrimary: "Hablemos de tu proyecto",
     ctaSecondary: "Ver proyectos",
   },
@@ -94,6 +94,14 @@ export const es = {
         longDescription:
           "Integramos APIs y automatizamos flujos entre las herramientas que tu equipo ya usa, eliminando tareas repetitivas y reduciendo el margen de error humano en procesos operativos.",
         tags: ["APIs", "Integraciones", "Automatizaciones", "Flujos empresariales"],
+      },
+      "agentes-ia": {
+        title: "Agentes de IA",
+        description:
+          "Asistentes y automatizaciones con IA que atienden clientes, responden consultas y ejecutan tareas por tu equipo.",
+        longDescription:
+          "Diseñamos agentes de inteligencia artificial conectados a tus datos y herramientas — desde chatbots que atienden consultas y agendan citas, hasta asistentes internos que ejecutan tareas repetitivas — para que tu equipo dedique tiempo a lo que realmente requiere una persona.",
+        tags: ["Chatbots", "Asistentes IA", "Automatización con IA", "Integraciones"],
       },
     },
   },
@@ -159,12 +167,19 @@ export const es = {
       available: "Disponible",
       viewInfo: "Ver información",
     },
+    ctaLabel: "Ver caso real",
   },
   projects: {
     eyebrow: "PROYECTOS",
     heading: "Proyectos que hablan por nosotros.",
     viewProject: "Ver proyecto",
     items: {
+      "sistema-mapas-comerciales": {
+        name: "Sistema de Mapas Comerciales para venta de lotes",
+        description:
+          "Uno de los sistemas internos de Dev Works: una plataforma con mapa interactivo para gestionar y vender lotes de urbanizaciones y proyectos inmobiliarios. Cada lote se ve por color según su estado (disponible, reservado o vendido), con ficha de precio y superficie, reserva en línea y simulador de pago. Es una de las soluciones que más hemos implementado para clientes del sector inmobiliario.",
+        category: "GIS & Mapas · Caso de estudio",
+      },
       alphitech: {
         name: "Catálogo técnico de productos — ALPHI Technology",
         description:
@@ -251,6 +266,7 @@ export const es = {
       "Aplicaciones",
       "GIS & Mapas",
       "Automatización",
+      "Agentes de IA",
       "Otro",
     ],
     labels: {
