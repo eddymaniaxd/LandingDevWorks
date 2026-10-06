@@ -97,7 +97,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   if (targetLocale !== "es") {
     const suffix = pathname === "/" ? "" : pathname;
-    return redirect(`/${targetLocale}${suffix}`, 302);
+    // Se conserva la query (p. ej. ?need=team) para no perder el contexto
+    // con el que llegó el visitante.
+    return redirect(`/${targetLocale}${suffix}${url.search}`, 302);
   }
 
   return next();

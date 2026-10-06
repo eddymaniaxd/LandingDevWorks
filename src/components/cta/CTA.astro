@@ -1,6 +1,6 @@
 ---
 import Icon from "@components/shared/Icon.astro";
-import { site } from "@/lib/site";
+import { site, getWhatsAppHref } from "@/lib/site";
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { useTranslations, localizedPath } from "@/i18n/utils";
 
@@ -41,7 +41,7 @@ const t = useTranslations(lang);
 
       {site.whatsapp.isConfigured && (
         <a
-          href={site.whatsapp.href}
+          href={getWhatsAppHref(lang, t)}
           target="_blank"
           rel="noopener noreferrer"
           data-analytics="whatsapp_click"

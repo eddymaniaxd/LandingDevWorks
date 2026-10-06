@@ -52,12 +52,13 @@ const isVideo = project.imageUrl ? isVideoUrl(project.imageUrl) : false;
     {project.imageUrl ? (
       isVideo ? (
         <video
-          src={project.imageUrl}
-          autoplay
+          data-lazy-video
+          data-src={project.imageUrl}
+          poster={project.posterUrl}
           loop
           muted
           playsinline
-          preload="metadata"
+          preload="none"
           aria-label={`${t.caseStudy.imageAltPrefix} ${copy.name}`}
           style={project.imagePosition ? `object-position: ${project.imagePosition}` : undefined}
           class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -114,3 +115,45 @@ const isVideo = project.imageUrl ? isVideoUrl(project.imageUrl) : false;
     </a>
   </div>
 </article>
+
+<script>
+  // Videos de proyectos: se descargan y reproducen recién cuando la tarjeta
+  // está por entrar en pantalla, para no bajar ~2 MB al abrir la página.
+  // Mientras tanto se ve el póster (un cuadro del mismo video).
+  function initLazyVideos() {
+    const videos = document.querySelectorAll<HTMLVideoElement>("video[data-lazy-video]");
+    if (videos.length === 0) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const start = (video: HTMLVideoElement) => {
+      if (!video.getAttribute("src") && video.dataset.src) {
+        video.src = video.dataset.src;
+      }
+      if (!reduceMotion) video.play().catch(() => {});
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      videos.forEach(start);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            start(entry.target as HTMLVideoElement);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "300px 0px" },
+    );
+    videos.forEach((video) => observer.observe(video));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLazyVideos);
+  } else {
+    initLazyVideos();
+  }
+</script>

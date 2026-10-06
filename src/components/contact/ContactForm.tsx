@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { isValidEmail } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
@@ -33,6 +33,10 @@ interface ContactFormProps {
 export default function ContactForm({ lang = defaultLocale }: ContactFormProps) {
   const t = useTranslations(lang);
   const NEED_OPTIONS = t.contactForm.needOptions;
+  // En inglés (clientes de EE.UU. y otros mercados donde WhatsApp no es el
+  // canal habitual para temas de trabajo) el formulario envía por correo vía
+  // /api/contact en vez de abrir WhatsApp.
+  const sendViaWhatsApp = site.whatsapp.isConfigured && lang !== "en";
 
   function buildWhatsAppMessage(values: FormState): string {
     const wa = t.contactForm.whatsappMessage;
@@ -48,6 +52,15 @@ export default function ContactForm({ lang = defaultLocale }: ContactFormProps) 
   const [errorMessage, setErrorMessage] = useState<string>("");
   const hasStartedRef = useRef(false);
   const renderedAtRef = useRef<number>(Date.now());
+
+  // Si el visitante llega desde /team (?need=team), se preselecciona la
+  // opción "desarrolladores para mi equipo".
+  useEffect(() => {
+    const need = new URLSearchParams(window.location.search).get("need");
+    if (need === "team") {
+      setValues((prev) => (prev.need ? prev : { ...prev, need: t.contactForm.needTeamOption }));
+    }
+  }, []);
 
   function handleChange<K extends keyof FormState>(key: K, value: string) {
     if (!hasStartedRef.current) {
@@ -95,7 +108,7 @@ export default function ContactForm({ lang = defaultLocale }: ContactFormProps) 
 
     // Canal principal: WhatsApp. Se abre de forma síncrona (dentro del mismo
     // click) para que el navegador no lo bloquee como pop-up.
-    if (site.whatsapp.isConfigured) {
+    if (sendViaWhatsApp) {
       const message = buildWhatsAppMessage(values);
       const url = `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(message)}`;
       window.open(url, "_blank", "noopener,noreferrer");
@@ -107,7 +120,7 @@ export default function ContactForm({ lang = defaultLocale }: ContactFormProps) 
       return;
     }
 
-    // Sin WhatsApp configurado: único canal disponible es el backend (email/webhook).
+    // Sin WhatsApp configurado (o en inglés): el canal es el backend (email/webhook).
     setStatus("loading");
     setErrorMessage("");
 
@@ -155,10 +168,10 @@ export default function ContactForm({ lang = defaultLocale }: ContactFormProps) 
       >
         <CheckCircle2 size={40} className="text-accent-2" strokeWidth={1.5} />
         <h3 className="font-display text-xl font-semibold text-foreground">
-          {site.whatsapp.isConfigured ? t.contactForm.success.whatsappTitle : t.contactForm.success.emailTitle}
+          {sendViaWhatsApp ? t.contactForm.success.whatsappTitle : t.contactForm.success.emailTitle}
         </h3>
         <p className="max-w-sm text-sm text-foreground-muted">
-          {site.whatsapp.isConfigured ? t.contactForm.success.whatsappBody : t.contactForm.success.emailBody}
+          {sendViaWhatsApp ? t.contactForm.success.whatsappBody : t.contactForm.success.emailBody}
         </p>
         <button
           type="button"

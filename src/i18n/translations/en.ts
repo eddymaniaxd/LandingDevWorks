@@ -5,12 +5,12 @@ export const en: Dictionary = {
     home: {
       title: "Dev Works — Digital solutions that grow your business",
       description:
-        "Commercial lot-mapping systems for real estate, web development, e-commerce, business software, and GIS solutions. We turn ideas into digital solutions that grow your business.",
+        "Software development studio working US Eastern hours: web platforms, business software, e-commerce, AI automation and GIS systems for companies in the US and Latin America.",
     },
     contact: {
       title: "Contact",
       description:
-        "Tell us what you want to build. Write to us through the form or on WhatsApp and let's talk about your project.",
+        "Tell us what you want to build. Write to us through the form or by email and we'll get back to you within one business day.",
     },
     blog: {
       title: "Blog — Dev Works",
@@ -34,9 +34,11 @@ export const en: Dictionary = {
     badge: "Software · Design · Automation",
     title: "We turn ideas into digital solutions that grow your business.",
     description:
-      "Commercial lot-mapping systems for real estate, web development, e-commerce, business software, and GIS solutions designed to solve real problems.",
+      "Web platforms, business software, e-commerce and AI automation for companies in the US and Latin America, built by a team that works your hours.",
     ctaPrimary: "Let's talk about your project",
     ctaSecondary: "See projects",
+    location: "Based in Bolivia · Working US Eastern business hours",
+    teamLink: "Hiring developers? Extend your team with us",
   },
   heroVisual: {
     activity: "Project activity",
@@ -45,8 +47,13 @@ export const en: Dictionary = {
     readyForProduction: "// production ready",
   },
   trust: {
-    heading: "Technology applied to real problems.",
-    categories: ["Web", "E-commerce", "Software", "Apps", "GIS", "Automation"],
+    heading: "Clients in the US, Mexico, Germany and Bolivia.",
+    clients: [
+      { name: "ALPHI Technology", location: "Arizona, US" },
+      { name: "Vic Myers Associates", location: "New Mexico, US" },
+      { name: "Photofloh", location: "Pirmasens, Germany" },
+    ],
+    more: "+ projects in Mexico and Bolivia",
   },
   services: {
     eyebrow: "SERVICES",
@@ -253,6 +260,7 @@ export const en: Dictionary = {
     whatsapp: "WhatsApp",
   },
   contactPage: {
+    bookingLink: "Prefer a call? Book 15 minutes",
     eyebrow: "CONTACT",
     heading: "Let's talk about your project.",
     description:
@@ -268,14 +276,16 @@ export const en: Dictionary = {
       "GIS & Maps",
       "Automation",
       "AI Agents",
+      "Developers for my team",
       "Other",
     ],
+    needTeamOption: "Developers for my team",
     labels: {
       name: "Name",
       email: "Email",
       company: "Company",
       optional: "(optional)",
-      whatsapp: "WhatsApp",
+      whatsapp: "Phone",
       need: "What do you need?",
       message: "Message",
     },
@@ -323,6 +333,7 @@ export const en: Dictionary = {
   },
   whatsappFloat: {
     ariaLabel: "Message Dev Works on WhatsApp",
+    prefill: "Hi Dev Works, I'd like to talk about a project.",
   },
   caseStudy: {
     backToProjects: "Back to projects",
@@ -355,6 +366,90 @@ export const en: Dictionary = {
     },
     ctaHeading: "Want a similar result for your business?",
     ctaButton: "Let's talk about your project",
+  },
+  teamPage: {
+    meta: {
+      title: "Senior developers in your time zone",
+      description:
+        "Extend your team with senior developers who work US Eastern hours. React, Next.js, Node.js and Laravel — AI-assisted, code-reviewed, starting with a 2-week pilot.",
+    },
+    hero: {
+      badge: "Dedicated developers · Team extension",
+      title: "Senior developers who work New York hours.",
+      description:
+        "Extend your team with developers who ship in React, Next.js, Node.js and Laravel. AI-assisted, code-reviewed, and online during your business day.",
+      ctaBook: "Book a 15-min call",
+      ctaContact: "Tell us about your team",
+      ctaSecondary: "See our work",
+      location: "Based in Bolivia (UTC-4) · Online during US business hours",
+    },
+    facts: {
+      label: "Engagement summary",
+      title: "AT A GLANCE",
+      items: [
+        { label: "Time zone", value: "UTC-4 · New York hours" },
+        { label: "Overlap", value: "7–9 h with ET/CT · 5–6 h with PT" },
+        { label: "Stack", value: "React · Next.js · Node.js · Laravel" },
+        { label: "Start", value: "2-week pilot" },
+        { label: "Contract", value: "Month to month, no lock-in" },
+        { label: "Languages", value: "English and Spanish" },
+      ],
+    },
+    why: {
+      eyebrow: "WHY DEV WORKS",
+      heading: "AI speed, senior judgment.",
+      items: [
+        {
+          title: "Your time zone",
+          description:
+            "We work from Bolivia (UTC-4): the same time as New York for most of the year, and one hour ahead in winter. Same-day answers, not next-day replies.",
+        },
+        {
+          title: "AI-assisted, senior-reviewed",
+          description:
+            "We use AI coding tools to move faster, and a senior developer reviews and tests every change before it reaches your codebase.",
+        },
+        {
+          title: "Low-risk start",
+          description:
+            "Start with a 2-week pilot on real tickets. No long-term contract: continue month to month only if it works for you.",
+        },
+        {
+          title: "Clear, async communication",
+          description:
+            "Daily written updates in your tools (Slack, Jira, GitHub) and a weekly call to review progress.",
+        },
+      ],
+    },
+    steps: {
+      eyebrow: "HOW IT WORKS",
+      heading: "From first call to shipping code, in three steps.",
+      items: [
+        {
+          title: "15-minute call",
+          description: "Tell us about your stack, your backlog and what a great developer looks like on your team.",
+        },
+        {
+          title: "2-week pilot",
+          description: "We work on real tickets in your repository, so you judge actual work, not a sales pitch.",
+        },
+        {
+          title: "Scale at your pace",
+          description: "Continue month to month and adjust the team as your roadmap changes.",
+        },
+      ],
+    },
+    work: {
+      eyebrow: "SELECTED WORK",
+      heading: "Built for clients in several countries.",
+    },
+    video: {
+      heading: "Meet Dev Works in 60 seconds",
+    },
+    cta: {
+      heading: "Need another developer this month?",
+      description: "Tell us about your stack and your backlog. We reply within one business day.",
+    },
   },
   seo: {
     ogLocale: "en_US",

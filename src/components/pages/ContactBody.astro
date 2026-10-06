@@ -1,7 +1,7 @@
 ---
 import ContactForm from "@components/contact/ContactForm";
 import Icon from "@components/shared/Icon.astro";
-import { site } from "@/lib/site";
+import { site, getWhatsAppHref } from "@/lib/site";
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { useTranslations } from "@/i18n/utils";
 
@@ -27,9 +27,23 @@ const t = useTranslations(lang);
       </p>
 
       <div data-reveal data-reveal-delay="180" class="mt-10 space-y-4">
+        {site.bookingUrl && (
+          <a
+            href={site.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics="booking_click"
+            class="flex items-center gap-3 text-sm text-foreground-muted transition-colors hover:text-foreground"
+          >
+            <span class="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface text-accent">
+              <Icon name="calendar" size={18} />
+            </span>
+            {t.contactPage.bookingLink}
+          </a>
+        )}
         {site.whatsapp.isConfigured && (
           <a
-            href={site.whatsapp.href}
+            href={getWhatsAppHref(lang, t)}
             target="_blank"
             rel="noopener noreferrer"
             data-analytics="whatsapp_click"
@@ -62,6 +76,14 @@ const t = useTranslations(lang);
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: "whatsapp_click", source: "contact_page" });
       window.gtag?.("event", "whatsapp_click", { source: "contact_page" });
+    });
+  });
+
+  document.querySelectorAll('[data-analytics="booking_click"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "booking_click", source: "contact_page" });
+      window.gtag?.("event", "booking_click", { source: "contact_page" });
     });
   });
 </script>

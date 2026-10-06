@@ -35,6 +35,8 @@ export const es = {
       "Sistemas de mapas comerciales para inmobiliarias, desarrollo web, e-commerce, software empresarial y soluciones GIS diseñadas para resolver problemas reales.",
     ctaPrimary: "Hablemos de tu proyecto",
     ctaSecondary: "Ver proyectos",
+    location: "Desde Bolivia para empresas de toda América",
+    teamLink: "¿Necesitas desarrolladores para tu equipo?",
   },
   heroVisual: {
     activity: "Actividad del proyecto",
@@ -43,8 +45,13 @@ export const es = {
     readyForProduction: "// listo para producción",
   },
   trust: {
-    heading: "Tecnología aplicada a problemas reales.",
-    categories: ["Web", "E-commerce", "Software", "Apps", "GIS", "Automatización"],
+    heading: "Clientes en EE.UU., México, Alemania y Bolivia.",
+    clients: [
+      { name: "ALPHI Technology", location: "Arizona, EE.UU." },
+      { name: "Vic Myers Associates", location: "Nuevo México, EE.UU." },
+      { name: "Photofloh", location: "Pirmasens, Alemania" },
+    ],
+    more: "+ proyectos en México y Bolivia",
   },
   services: {
     eyebrow: "SERVICIOS",
@@ -252,6 +259,7 @@ export const es = {
     whatsapp: "WhatsApp",
   },
   contactPage: {
+    bookingLink: "¿Prefieres una llamada? Agenda 15 minutos",
     eyebrow: "CONTACTO",
     heading: "Hablemos de tu proyecto.",
     description:
@@ -267,8 +275,12 @@ export const es = {
       "GIS & Mapas",
       "Automatización",
       "Agentes de IA",
+      "Desarrolladores para mi equipo",
       "Otro",
     ],
+    /** Debe coincidir con una de las opciones de needOptions: es la que se
+     * preselecciona al llegar desde /team (?need=team). */
+    needTeamOption: "Desarrolladores para mi equipo",
     labels: {
       name: "Nombre",
       email: "Email",
@@ -322,6 +334,7 @@ export const es = {
   },
   whatsappFloat: {
     ariaLabel: "Escribir por WhatsApp a Dev Works",
+    prefill: "Hola Dev Works, quiero conversar sobre un proyecto",
   },
   caseStudy: {
     backToProjects: "Volver a proyectos",
@@ -354,6 +367,91 @@ export const es = {
     },
     ctaHeading: "¿Quieres un resultado similar para tu negocio?",
     ctaButton: "Hablemos de tu proyecto",
+  },
+  teamPage: {
+    meta: {
+      title: "Desarrolladores senior para tu equipo",
+      description:
+        "Suma desarrolladores senior a tu equipo, en tu horario: React, Next.js, Node.js y Laravel, con IA y revisión de código. Empieza con un piloto de 2 semanas.",
+    },
+    hero: {
+      badge: "Desarrolladores dedicados · Extensión de equipo",
+      title: "Desarrolladores senior para tu equipo, en tu horario.",
+      description:
+        "Suma desarrolladores que entregan en React, Next.js, Node.js y Laravel: trabajan con IA, cada cambio pasa por revisión de código y están conectados durante tu jornada.",
+      ctaBook: "Agenda una llamada de 15 min",
+      ctaContact: "Cuéntanos sobre tu equipo",
+      ctaSecondary: "Ver proyectos",
+      location: "Desde Bolivia (UTC-4) · 7 a 9 horas diarias en común con México, Colombia, Chile y EE.UU.",
+    },
+    facts: {
+      label: "Resumen del servicio",
+      title: "EN RESUMEN",
+      items: [
+        { label: "Zona horaria", value: "UTC-4 (Bolivia)" },
+        { label: "Horas en común", value: "7–9 h con México, Colombia, Chile y EE.UU." },
+        { label: "Stack", value: "React · Next.js · Node.js · Laravel" },
+        { label: "Inicio", value: "Piloto de 2 semanas" },
+        { label: "Contrato", value: "Mes a mes, sin permanencia" },
+        { label: "Idiomas", value: "Español e inglés" },
+      ],
+    },
+    why: {
+      eyebrow: "POR QUÉ DEV WORKS",
+      heading: "La velocidad de la IA, con el criterio de un senior.",
+      items: [
+        {
+          title: "Tu mismo horario",
+          description:
+            "Trabajamos desde Bolivia (UTC-4), con 7 a 9 horas diarias en común con México, Colombia, Chile y EE.UU. Respuestas en el día, no al día siguiente.",
+        },
+        {
+          title: "IA con revisión senior",
+          description:
+            "Usamos herramientas de IA para avanzar más rápido, y un desarrollador senior revisa y prueba cada cambio antes de que llegue a tu código.",
+        },
+        {
+          title: "Empiezas con poco riesgo",
+          description:
+            "Arrancamos con un piloto de 2 semanas sobre tareas reales. Sin contratos largos: sigues mes a mes solo si te funciona.",
+        },
+        {
+          title: "Comunicación clara",
+          description:
+            "Avances diarios por escrito en tus herramientas (Slack, Jira, GitHub) y una llamada semanal para revisar el progreso.",
+        },
+      ],
+    },
+    steps: {
+      eyebrow: "CÓMO EMPEZAMOS",
+      heading: "De la primera llamada a tu equipo, en 3 pasos.",
+      items: [
+        {
+          title: "Llamada de 15 minutos",
+          description: "Nos cuentas tu stack, tu backlog y cómo se ve un buen desarrollador para tu equipo.",
+        },
+        {
+          title: "Piloto de 2 semanas",
+          description:
+            "Trabajamos en tareas reales dentro de tu repositorio, para que evalúes el trabajo y no una presentación de ventas.",
+        },
+        {
+          title: "Seguimos a tu ritmo",
+          description: "Continuamos mes a mes y ajustamos el equipo según cambie tu roadmap.",
+        },
+      ],
+    },
+    work: {
+      eyebrow: "TRABAJOS SELECCIONADOS",
+      heading: "Proyectos para clientes de varios países.",
+    },
+    video: {
+      heading: "Conoce Dev Works en 60 segundos",
+    },
+    cta: {
+      heading: "¿Necesitas sumar un desarrollador este mes?",
+      description: "Cuéntanos tu stack y tu backlog. Te respondemos en menos de un día hábil.",
+    },
   },
   seo: {
     ogLocale: "es_BO",

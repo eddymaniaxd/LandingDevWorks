@@ -208,6 +208,11 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    /* Con line-height ajustado (1.05), los descendentes (g, p, y) de la
+       última línea quedaban fuera de la caja y el degradado no los pintaba.
+       El padding extiende la caja y el margen negativo compensa el layout. */
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
   }
 
   .glow-accent {

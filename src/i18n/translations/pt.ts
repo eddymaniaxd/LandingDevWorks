@@ -37,6 +37,8 @@ export const pt: Dictionary = {
       "Sistemas de mapas comerciais para imobiliárias, desenvolvimento web, e-commerce, software empresarial e soluções GIS pensadas para resolver problemas reais.",
     ctaPrimary: "Vamos falar sobre seu projeto",
     ctaSecondary: "Ver projetos",
+    location: "Da Bolívia para empresas de toda a América",
+    teamLink: "Precisa de desenvolvedores para o seu time?",
   },
   heroVisual: {
     activity: "Atividade do projeto",
@@ -45,8 +47,13 @@ export const pt: Dictionary = {
     readyForProduction: "// pronto para produção",
   },
   trust: {
-    heading: "Tecnologia aplicada a problemas reais.",
-    categories: ["Web", "E-commerce", "Software", "Apps", "GIS", "Automação"],
+    heading: "Clientes nos EUA, no México, na Alemanha e na Bolívia.",
+    clients: [
+      { name: "ALPHI Technology", location: "Arizona, EUA" },
+      { name: "Vic Myers Associates", location: "Novo México, EUA" },
+      { name: "Photofloh", location: "Pirmasens, Alemanha" },
+    ],
+    more: "+ projetos no México e na Bolívia",
   },
   services: {
     eyebrow: "SERVIÇOS",
@@ -254,6 +261,7 @@ export const pt: Dictionary = {
     whatsapp: "WhatsApp",
   },
   contactPage: {
+    bookingLink: "Prefere uma ligação? Agende 15 minutos",
     eyebrow: "CONTATO",
     heading: "Vamos falar sobre seu projeto.",
     description:
@@ -269,8 +277,10 @@ export const pt: Dictionary = {
       "GIS & Mapas",
       "Automação",
       "Agentes de IA",
+      "Desenvolvedores para o meu time",
       "Outro",
     ],
+    needTeamOption: "Desenvolvedores para o meu time",
     labels: {
       name: "Nome",
       email: "Email",
@@ -324,6 +334,7 @@ export const pt: Dictionary = {
   },
   whatsappFloat: {
     ariaLabel: "Falar com a Dev Works pelo WhatsApp",
+    prefill: "Olá Dev Works, quero conversar sobre um projeto.",
   },
   caseStudy: {
     backToProjects: "Voltar aos projetos",
@@ -356,6 +367,91 @@ export const pt: Dictionary = {
     },
     ctaHeading: "Quer um resultado semelhante para o seu negócio?",
     ctaButton: "Vamos falar sobre seu projeto",
+  },
+  teamPage: {
+    meta: {
+      title: "Desenvolvedores sênior para o seu time",
+      description:
+        "Amplie seu time com desenvolvedores sênior no seu fuso horário: React, Next.js, Node.js e Laravel, com IA e revisão de código. Comece com um piloto de 2 semanas.",
+    },
+    hero: {
+      badge: "Desenvolvedores dedicados · Extensão de time",
+      title: "Desenvolvedores sênior para o seu time, no seu horário.",
+      description:
+        "Amplie seu time com desenvolvedores que entregam em React, Next.js, Node.js e Laravel: trabalham com IA, cada mudança passa por revisão de código e ficam online durante o seu expediente.",
+      ctaBook: "Agende uma ligação de 15 min",
+      ctaContact: "Conte-nos sobre o seu time",
+      ctaSecondary: "Ver projetos",
+      location: "Da Bolívia (UTC-4) · Apenas 1 hora de diferença de São Paulo",
+    },
+    facts: {
+      label: "Resumo do serviço",
+      title: "EM RESUMO",
+      items: [
+        { label: "Fuso horário", value: "UTC-4 · 1 h a menos que Brasília" },
+        { label: "Horas em comum", value: "8 h por dia com o horário de Brasília" },
+        { label: "Stack", value: "React · Next.js · Node.js · Laravel" },
+        { label: "Início", value: "Piloto de 2 semanas" },
+        { label: "Contrato", value: "Mês a mês, sem fidelidade" },
+        { label: "Idiomas", value: "Espanhol e inglês" },
+      ],
+    },
+    why: {
+      eyebrow: "POR QUE A DEV WORKS",
+      heading: "A velocidade da IA, com o critério de um sênior.",
+      items: [
+        {
+          title: "O seu fuso horário",
+          description:
+            "Trabalhamos da Bolívia (UTC-4), apenas 1 hora atrás de Brasília, com 8 horas por dia em comum. Respostas no mesmo dia, não no dia seguinte.",
+        },
+        {
+          title: "IA com revisão sênior",
+          description:
+            "Usamos ferramentas de IA para avançar mais rápido, e um desenvolvedor sênior revisa e testa cada mudança antes que ela chegue ao seu código.",
+        },
+        {
+          title: "Começo com pouco risco",
+          description:
+            "Começamos com um piloto de 2 semanas em tarefas reais. Sem contratos longos: você continua mês a mês só se funcionar para você.",
+        },
+        {
+          title: "Comunicação clara",
+          description:
+            "Atualizações diárias por escrito nas suas ferramentas (Slack, Jira, GitHub) e uma ligação semanal para revisar o progresso.",
+        },
+      ],
+    },
+    steps: {
+      eyebrow: "COMO COMEÇAMOS",
+      heading: "Da primeira ligação ao seu time, em 3 passos.",
+      items: [
+        {
+          title: "Ligação de 15 minutos",
+          description: "Você nos conta sua stack, seu backlog e como é um bom desenvolvedor para o seu time.",
+        },
+        {
+          title: "Piloto de 2 semanas",
+          description:
+            "Trabalhamos em tarefas reais dentro do seu repositório, para você avaliar o trabalho e não uma apresentação de vendas.",
+        },
+        {
+          title: "Seguimos no seu ritmo",
+          description: "Continuamos mês a mês e ajustamos o time conforme o seu roadmap muda.",
+        },
+      ],
+    },
+    work: {
+      eyebrow: "TRABALHOS SELECIONADOS",
+      heading: "Projetos para clientes de vários países.",
+    },
+    video: {
+      heading: "Conheça a Dev Works em 60 segundos",
+    },
+    cta: {
+      heading: "Precisa de mais um desenvolvedor este mês?",
+      description: "Conte-nos sua stack e seu backlog. Respondemos em até um dia útil.",
+    },
   },
   seo: {
     ogLocale: "pt_BR",

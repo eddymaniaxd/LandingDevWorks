@@ -1,5 +1,6 @@
 ---
 import HeroVisual from "@components/hero/HeroVisual";
+import Icon from "@components/shared/Icon.astro";
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { useTranslations, localizedPath } from "@/i18n/utils";
 
@@ -12,7 +13,7 @@ const t = useTranslations(lang);
 const projectsHref = `${localizedPath("/", lang)}#proyectos`;
 ---
 
-<section class="relative flex min-h-[92vh] items-center overflow-hidden pt-28 md:min-h-[95vh] md:pt-32">
+<section class="relative flex min-h-[92vh] items-center overflow-hidden pb-24 pt-28 md:min-h-[95vh] md:pb-28 md:pt-32">
   <!-- Technical grid + glow backdrop -->
   <div class="bg-grid pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
   <div
@@ -23,7 +24,8 @@ const projectsHref = `${localizedPath("/", lang)}#proyectos`;
   </div>
 
   <div class="container-page grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
-    <div>
+    <!-- z-10: el texto queda por encima del degradado inferior del hero. -->
+    <div class="relative z-10">
       <p
         class="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-pill border border-border bg-surface/60 px-4 py-1.5 text-xs font-medium tracking-wide text-foreground-muted"
         style="animation-delay: 0ms"
@@ -63,10 +65,30 @@ const projectsHref = `${localizedPath("/", lang)}#proyectos`;
           {t.hero.ctaSecondary}
         </a>
       </div>
+
+      <div
+        class="animate-fade-up mt-8 flex flex-col gap-3 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6"
+        style="animation-delay: 320ms"
+      >
+        <span class="inline-flex items-center gap-2 text-foreground-muted">
+          <Icon name="map-pin" size={15} class="text-accent-2" />
+          {t.hero.location}
+        </span>
+        <a
+          href={localizedPath("/team", lang)}
+          data-analytics="hero_team_link_click"
+          class="group inline-flex items-center gap-1.5 font-medium text-accent transition-colors hover:text-accent-hover"
+        >
+          {t.hero.teamLink}
+          <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
 
-    <div class="animate-fade-in relative" style="animation-delay: 320ms">
-      <HeroVisual client:idle lang={lang} />
+    <!-- Visual decorativo: solo en escritorio. En móvil ocupaba una pantalla
+         completa antes de llegar al contenido, y así tampoco se hidrata ahí. -->
+    <div class="animate-fade-in relative hidden lg:block" style="animation-delay: 320ms">
+      <HeroVisual client:media="(min-width: 1024px)" lang={lang} />
     </div>
   </div>
 
@@ -74,7 +96,7 @@ const projectsHref = `${localizedPath("/", lang)}#proyectos`;
 </section>
 
 <script>
-  document.querySelectorAll('[data-analytics="hero_cta_click"], [data-analytics="hero_secondary_cta_click"]').forEach((el) => {
+  document.querySelectorAll('[data-analytics="hero_cta_click"], [data-analytics="hero_secondary_cta_click"], [data-analytics="hero_team_link_click"]').forEach((el) => {
     el.addEventListener("click", (e) => {
       const eventName = (e.currentTarget as HTMLElement).getAttribute("data-analytics");
       window.dataLayer = window.dataLayer || [];

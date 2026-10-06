@@ -1,0 +1,256 @@
+---
+/**
+ * Página de campaña /team: para empresas que buscan sumar desarrolladores a
+ * su equipo (el público de las vacantes front-end / back-end en LinkedIn).
+ * Es la página que se comparte en el outreach (devworks.lat/en/team).
+ *
+ * Opcional por variables de entorno (ver .env.example):
+ * - PUBLIC_BOOKING_URL: si existe, el CTA principal abre la agenda; si no,
+ *   lleva al formulario de contacto con la opción "equipo" preseleccionada.
+ * - PUBLIC_INTRO_VIDEO_URL: si existe, se muestra el video de presentación.
+ */
+import Icon from "@components/shared/Icon.astro";
+import Trust from "@components/trust/Trust.astro";
+import Technology from "@components/technology/Technology.astro";
+import ProjectCard from "@components/projects/ProjectCard.astro";
+import { projects, type Project } from "@/data/projects";
+import { site } from "@/lib/site";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { useTranslations, localizedPath } from "@/i18n/utils";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+const copy = t.teamPage;
+
+const hasBooking = Boolean(site.bookingUrl);
+const contactHref = `${localizedPath("/contacto", lang)}?need=team`;
+const primaryHref = hasBooking ? site.bookingUrl : contactHref;
+const primaryLabel = hasBooking ? copy.hero.ctaBook : copy.hero.ctaContact;
+const primaryTarget = hasBooking ? "_blank" : undefined;
+const primaryRel = hasBooking ? "noopener noreferrer" : undefined;
+
+// Proyectos más relevantes para un comprador internacional.
+const featuredIds: Project["id"][] = ["alphitech", "vicmyers", "photofloh", "sistema-mapas-comerciales"];
+const featured = featuredIds
+  .map((id) => projects.find((project) => project.id === id))
+  .filter((project): project is Project => Boolean(project));
+
+const whyIcons = ["clock", "sparkles", "shield-check", "messages-square"];
+---
+
+<section class="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40" aria-labelledby="team-heading">
+  <div class="bg-grid pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[560px] w-[560px] rounded-full opacity-40 blur-[120px]"
+    style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+    <div>
+      <p
+        class="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-pill border border-border bg-surface/60 px-4 py-1.5 text-xs font-medium tracking-wide text-foreground-muted"
+        style="animation-delay: 0ms"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-accent-2"></span>
+        {copy.hero.badge}
+      </p>
+
+      <h1
+        id="team-heading"
+        class="animate-fade-up text-gradient font-display text-h1 font-semibold text-balance"
+        style="animation-delay: 80ms"
+      >
+        {copy.hero.title}
+      </h1>
+
+      <p class="animate-fade-up mt-6 max-w-xl text-body-lg leading-relaxed text-foreground-muted" style="animation-delay: 180ms">
+        {copy.hero.description}
+      </p>
+
+      <div class="animate-fade-up mt-10 flex flex-col gap-4 sm:flex-row sm:items-center" style="animation-delay: 260ms">
+        <a
+          href={primaryHref}
+          target={primaryTarget}
+          rel={primaryRel}
+          data-analytics="team_cta_click"
+          data-source="hero"
+          class="group inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-7 py-3.5 text-sm font-medium text-white shadow-soft transition-all hover:bg-accent-hover"
+        >
+          {primaryLabel}
+          <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+        <a
+          href="#work"
+          class="inline-flex items-center justify-center gap-2 rounded-pill border border-border-strong px-7 py-3.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-surface"
+        >
+          {copy.hero.ctaSecondary}
+        </a>
+      </div>
+
+      <p class="animate-fade-up mt-8 inline-flex items-start gap-2 text-sm text-foreground-muted" style="animation-delay: 320ms">
+        <Icon name="map-pin" size={15} class="mt-0.5 shrink-0 text-accent-2" />
+        {copy.hero.location}
+      </p>
+    </div>
+
+    <aside
+      class="animate-fade-in glass rounded-lg p-6 shadow-soft md:p-8"
+      style="animation-delay: 320ms"
+      aria-label={copy.facts.label}
+    >
+      <p class="text-xs font-medium tracking-[0.14em] text-accent">{copy.facts.title}</p>
+      <dl class="mt-6 divide-y divide-border">
+        {copy.facts.items.map((item) => (
+          <div class="flex flex-col gap-1 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <dt class="text-sm text-muted">{item.label}</dt>
+            <dd class="text-sm font-medium text-foreground sm:text-right">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<Trust lang={lang} />
+
+{site.introVideoUrl && (
+  <section class="py-20 md:py-28" aria-labelledby="team-video-heading">
+    <div class="container-page">
+      <div class="mx-auto max-w-4xl">
+        <h2 id="team-video-heading" data-reveal class="text-center font-display text-h3 font-semibold text-foreground">
+          {copy.video.heading}
+        </h2>
+        <div data-reveal data-reveal-delay="80" class="glass mt-10 aspect-video w-full overflow-hidden rounded-lg shadow-soft">
+          <iframe
+            src={site.introVideoUrl}
+            title={copy.video.heading}
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            class="h-full w-full"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="py-24 md:py-32" aria-labelledby="team-why-heading">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{copy.why.eyebrow}</p>
+      <h2 id="team-why-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground text-balance">
+        {copy.why.heading}
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-6 sm:grid-cols-2">
+      {copy.why.items.map((item, index) => (
+        <div data-reveal data-reveal-delay={index * 80} class="rounded-lg border border-border bg-surface p-6 md:p-8">
+          <span class="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background-elevated text-accent">
+            <Icon name={whyIcons[index % whyIcons.length]} size={20} />
+          </span>
+          <h3 class="mt-5 font-display text-xl font-semibold text-foreground">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-foreground-muted md:text-base">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="border-y border-border bg-background-elevated py-24 md:py-32" aria-labelledby="team-steps-heading">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{copy.steps.eyebrow}</p>
+      <h2 id="team-steps-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground text-balance">
+        {copy.steps.heading}
+      </h2>
+    </div>
+
+    <ol class="mt-14 grid gap-6 md:grid-cols-3">
+      {copy.steps.items.map((step, index) => (
+        <li data-reveal data-reveal-delay={index * 80} class="rounded-lg border border-border bg-surface p-6 md:p-8">
+          <span class="font-mono text-xs text-accent">{String(index + 1).padStart(2, "0")}</span>
+          <h3 class="mt-4 font-display text-xl font-semibold text-foreground">{step.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-foreground-muted md:text-base">{step.description}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<Technology lang={lang} />
+
+<section id="work" class="border-t border-border py-24 md:py-32" aria-labelledby="team-work-heading">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p data-reveal class="mb-4 text-sm font-medium tracking-[0.14em] text-accent">{copy.work.eyebrow}</p>
+      <h2 id="team-work-heading" data-reveal data-reveal-delay="60" class="font-display text-h2 font-semibold text-foreground text-balance">
+        {copy.work.heading}
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-6 sm:grid-cols-2">
+      {featured.map((project, index) => (
+        <ProjectCard project={project} index={index} lang={lang} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="relative overflow-hidden py-28 md:py-36" aria-labelledby="team-cta-heading">
+  <div class="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-50" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[720px] -translate-x-1/2 rounded-full opacity-30 blur-[140px]"
+    style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page flex flex-col items-center text-center">
+    <h2 id="team-cta-heading" data-reveal class="max-w-2xl font-display text-h2 font-semibold text-foreground text-balance">
+      {copy.cta.heading}
+    </h2>
+    <p data-reveal data-reveal-delay="80" class="mt-6 max-w-lg text-body-lg leading-relaxed text-foreground-muted">
+      {copy.cta.description}
+    </p>
+
+    <div data-reveal data-reveal-delay="160" class="mt-10 flex flex-col gap-4 sm:flex-row">
+      <a
+        href={primaryHref}
+        target={primaryTarget}
+        rel={primaryRel}
+        data-analytics="team_cta_click"
+        data-source="final_cta"
+        class="group inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-8 py-4 text-sm font-medium text-white shadow-soft transition-all hover:bg-accent-hover"
+      >
+        {primaryLabel}
+        <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+      </a>
+      <a
+        href={`mailto:${site.contactEmail}`}
+        class="inline-flex items-center justify-center gap-2 rounded-pill border border-border-strong px-8 py-4 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-surface"
+      >
+        <Icon name="mail" size={16} />
+        {site.contactEmail}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-analytics="team_cta_click"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      const source = el.getAttribute("data-source") || "team_page";
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "team_cta_click", source });
+      window.gtag?.("event", "team_cta_click", { source });
+    });
+  });
+</script>

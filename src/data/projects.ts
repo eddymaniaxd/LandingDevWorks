@@ -20,6 +20,9 @@ export interface Project {
    * para gráficos anchos donde el recorte centrado por defecto corta texto
    * importante (p. ej. un logo o título a la izquierda de la imagen). */
   imagePosition?: string;
+  /** Imagen fija (un cuadro del video) que se muestra mientras el video de
+   * imageUrl todavía no se cargó. Solo aplica cuando imageUrl es un video. */
+  posterUrl?: string;
   /** Segunda captura/video opcional, para proyectos con más de un caso real
    * que mostrar (p. ej. un producto reutilizado en distintos clientes). Se
    * muestra debajo de imageUrl en la página de detalle del proyecto. */
@@ -40,6 +43,7 @@ export const projects: Project[] = [
     // (de ~22 MB en gif a ~2 MB) para no afectar el rendimiento de la
     // página. El gráfico de marca queda como segundo modelo.
     imageUrl: "/projects/sistema-mapas-comerciales.mp4",
+    posterUrl: "/projects/sistema-mapas-comerciales-poster.webp",
     secondaryImageUrl: "/projects/sistema-mapas-comerciales-cover.webp",
     imagePending: false,
   },

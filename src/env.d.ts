@@ -7,6 +7,8 @@ interface ImportMetaEnv {
   readonly PUBLIC_CONTACT_EMAIL: string;
   readonly PUBLIC_LINKEDIN_URL: string;
   readonly PUBLIC_GA_MEASUREMENT_ID: string;
+  readonly PUBLIC_BOOKING_URL: string;
+  readonly PUBLIC_INTRO_VIDEO_URL: string;
   readonly GMAIL_USER: string;
   readonly GMAIL_APP_PASSWORD: string;
   readonly CONTACT_EMAIL_TO: string;

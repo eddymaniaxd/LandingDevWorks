@@ -1,0 +1,16 @@
+---
+import Layout from "@layouts/Layout.astro";
+import TeamBody from "@components/pages/TeamBody.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const t = useTranslations("es");
+---
+
+<Layout
+  title={t.teamPage.meta.title}
+  description={t.teamPage.meta.description}
+  path="/team"
+  lang="es"
+>
+  <TeamBody lang="es" />
+</Layout>

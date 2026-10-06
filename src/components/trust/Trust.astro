@@ -10,18 +10,25 @@ const { lang = defaultLocale } = Astro.props;
 const t = useTranslations(lang);
 ---
 
+<!-- Franja de confianza: clientes reales (los mismos que aparecen en
+     Proyectos) con su ubicación, en vez de categorías genéricas. -->
 <section class="border-y border-border bg-background-elevated py-16 md:py-20" aria-labelledby="trust-heading">
   <div class="container-page">
-    <h2 id="trust-heading" class="text-center font-display text-h3 font-semibold text-foreground">
+    <h2 id="trust-heading" class="text-center font-display text-h3 font-semibold text-foreground text-balance">
       {t.trust.heading}
     </h2>
 
-    <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:mt-12 md:gap-x-14">
-      {t.trust.categories.map((category) => (
-        <li class="text-sm font-medium tracking-[0.14em] text-muted transition-colors hover:text-foreground-muted">
-          {category}
+    <ul class="mt-10 flex flex-wrap items-start justify-center gap-x-12 gap-y-8 md:mt-12 md:gap-x-16">
+      {t.trust.clients.map((client) => (
+        <li class="flex flex-col items-center gap-1 text-center">
+          <span class="font-display text-lg font-semibold tracking-tight text-foreground-muted md:text-xl">
+            {client.name}
+          </span>
+          <span class="text-xs tracking-wide text-muted">{client.location}</span>
         </li>
       ))}
     </ul>
+
+    <p class="mt-8 text-center text-sm text-muted">{t.trust.more}</p>
   </div>
 </section>

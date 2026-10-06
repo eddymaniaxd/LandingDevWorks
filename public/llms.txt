@@ -29,6 +29,10 @@ Dev Works diseña y construye productos digitales a medida para empresas y empre
 - [Cómo construimos un sistema de inventario a medida](https://devworks.lat/blog/sistema-inventario-mexico)
 - [Astro, WordPress o Next.js: qué tecnología conviene](https://devworks.lat/blog/astro-wordpress-nextjs)
 
+## Desarrolladores para tu equipo
+
+- [Desarrolladores senior para tu equipo](https://devworks.lat/team): desarrolladores dedicados (React, Next.js, Node.js, Laravel) que trabajan en horario de América (UTC-4), con IA y revisión de código; empieza con un piloto de 2 semanas. English: https://devworks.lat/en/team — Português: https://devworks.lat/pt/team
+
 ## Contacto
 
 - Sitio: https://devworks.lat
